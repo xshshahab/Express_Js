@@ -1,0 +1,22 @@
+->  Good Practice but i use old for practice 
+
+//  [  /api/users/:id  ]  -> I can see that this route is use for many time. I can directly create a app.route method and use chaining for particular HTTP requests is easy to handle and understand.
+
+app
+  .route("/api/users/:id")
+  .get((req, res) => {
+    const id = req.params.id;
+    const user = users.find((user) => user.id === parseInt(id));
+    return res.json(user);
+  })
+  .patch((req, res) => {
+    // Todo : Edit existing users.
+    return res.json({ status: "pending" });
+  })
+  .delete((req, res) => {
+    // Todo :Delete this existing data. by id
+    return res.json({ status: "pending" });
+  });
+
+
+  
