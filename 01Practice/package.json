@@ -1,0 +1,14 @@
+{
+  "name": "01practice",
+  "version": "1.0.0",
+  "description": "Practice RESTFull API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Md. Shahabuddin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}

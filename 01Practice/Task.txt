@@ -1,0 +1,14 @@
+Designing Rest Api - JSON.
+
+GET /users -> Html Document render
+
+GET /api/users -> List all users
+GET /api/users/{id} -> Get user by id
+
+POST /api/users -> Create new user
+
+PATCH /api/users/{id} -> Edit the user by id
+
+DELETE /api/users/{id} -> Delete the user by id
+
+NOTE : I'm using [mockaroo] for generating dummy data for simplicity.
