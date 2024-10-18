@@ -1,0 +1,16 @@
+{
+  "name": "01practice",
+  "version": "1.0.1",
+  "description": "Practice RESTFull API Mongo Db",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Md. Shahabuddin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7"
+  }
+}
