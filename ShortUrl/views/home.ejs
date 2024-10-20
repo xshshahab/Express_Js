@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Short URL Shortener</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212; /* Dark background */
+        color: #f4f4f4; /* Light text color */
+        margin: 0;
+        padding: 20px;
+      }
+      #wrapper {
+        max-width: 800px; /* Max width for better readability */
+        margin: auto; /* Center the wrapper */
+        padding: 0 15px; /* Left and right padding */
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4a90e2; /* Bright accent color */
+        font-size: 2.5em; /* Increased size for emphasis */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+      }
+      .form-container {
+        background: #1e1e1e; /* Darker card background */
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #e0e0e0; /* Lighter label color */
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 12px; /* Increased padding */
+        border: 1px solid #444; /* Dark border */
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #333; /* Input background */
+        color: #f4f4f4; /* Input text color */
+        transition: border-color 0.3s; /* Smooth transition */
+      }
+      input[type="text"]:focus {
+        border-color: #4a90e2; /* Focus border color */
+        outline: none; /* Remove outline */
+      }
+      button {
+        background-color: #4a90e2; /* Button background */
+        color: white;
+        padding: 12px 20px; /* Increased padding */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #357ab8; /* Darker button on hover */
+      }
+      .generated-url {
+        margin-top: 10px;
+        padding: 10px;
+        background: #2a2a2a; /* Light dark background */
+        border: 1px solid #4a90e2; /* Bright border */
+        border-radius: 5px;
+      }
+      .analytics-header {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #e0e0e0; /* Light text color */
+        font-size: 1.8em; /* Increased font size */
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #1e1e1e; /* Dark table background */
+        border-radius: 8px; /* Rounded corners */
+        overflow: hidden; /* Clipping */
+      }
+      th,
+      td {
+        padding: 12px; /* Increased padding */
+        text-align: left;
+        border-bottom: 1px solid #444; /* Dark border */
+      }
+      th {
+        background-color: #3a3a3a; /* Header background */
+        color: #e0e0e0; /* Lighter header text */
+      }
+      tr:hover {
+        background-color: #444; /* Row hover effect */
+      }
+      .no-urls {
+        color: #f4f4f4; /* Light text for no URLs */
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>URL Shortener</h1>
+
+      <div class="form-container">
+        <form method="POST" action="/url">
+          <label for="url">Enter Your Original URL</label>
+          <input
+            type="text"
+            name="url"
+            placeholder="https://example.com"
+            required
+          />
+          <button type="submit">Generate</button>
+        </form>
+        <% if(locals.id) { %>
+        <div class="generated-url">
+          <p>
+            URL Generated:
+            <a href="http://localhost:8080/url/<%= id %>" style="color: #4a90e2"
+              >http://localhost:8080/url/<%= id %></a
+            >
+          </p>
+        </div>
+        <% } %>
+      </div>
+
+      <div>
+        <h2 class="analytics-header">Analytics</h2>
+        <% if (locals.urls && urls.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Short ID</th>
+              <th>Redirect URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortId %></td>
+              <td><%= url.redirectURL %></td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <p class="no-urls">No URLs generated yet.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+Using Purpose : This route handles GET requests to redirect users from a shortened URL to its original link using a short ID.
+
+------------------------------------------------------------------------------------
+
+// Define a route to handle GET requests for a shortened URL using its short ID
+app.get("/url/:shortId", async (req, res) => {
+  
+  // Extract the shortId from the request parameters
+  const shortId = req.params.shortId;
+
+  // Find the entry in the database that matches the shortId and update it
+  const entry = await URL.findOneAndUpdate(
+    { shortId }, // Search for a document with the given shortId
+    {
+      $push: { // Push a new entry into the visitHistory array
+        visitHistory: {
+          timeStamp: Date.now(), // Store the current timestamp
+        },
+      },
+    }
+    // No options provided, so it defaults to returning the original document
+  );
+
+  // Redirect the user to the original URL using the redirectURL field from the entry
+  res.redirect(entry.redirectURL);
+});
+
+
+------------------------------------------------------------------------------------
